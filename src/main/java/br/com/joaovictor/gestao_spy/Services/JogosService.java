@@ -27,7 +27,7 @@ public class JogosService {
 
     }
 
-    public List<Jogo> update(Jogo jogo){
+    public List<Jogo> update(Jogo jogo, Long id){
 
         jogoRepository.save(jogo);
         return list();

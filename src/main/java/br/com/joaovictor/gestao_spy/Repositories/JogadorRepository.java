@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.joaovictor.gestao_spy.Entities.Jogador;
 
+@SuppressWarnings("rawtypes")
 public interface JogadorRepository  extends JpaRepository<Jogador, Long>{
 
     void update(Jogador jogador);

@@ -13,7 +13,9 @@ public class JogadorService {
     
     @Autowired
     public JogadorRepository jogadorRepository;
+    
 
+    @SuppressWarnings("rawtypes")
     public List<Jogador> create(Jogador jogador){
         
         jogadorRepository.save(jogador);
@@ -21,6 +23,7 @@ public class JogadorService {
 
     }
 
+    @SuppressWarnings("rawtypes")
     public List<Jogador> update(Jogador jogador, Long id){
 
         jogadorRepository.save(jogador);
@@ -28,12 +31,14 @@ public class JogadorService {
 
     }
 
+    @SuppressWarnings("rawtypes")
     public List<Jogador> list() {
 
         jogadorRepository.findAll();
         return list();
     }
 
+    @SuppressWarnings("rawtypes")
     public List<Jogador> delete (Long id) {
        
         jogadorRepository.deleteById(id);
@@ -42,10 +47,11 @@ public class JogadorService {
 
     }
 
-    public Long findById (Long id){
+    @SuppressWarnings("rawtypes")
+    public Jogador <Jogador> findById (Jogador jogador, Long id){
 
         jogadorRepository.findById(id);
-        return id;
+        return findById(jogador, id);
 
     }
 
