@@ -23,15 +23,14 @@ public class JogadorController {
     private JogadorService jogadorService;
 
 
-    @SuppressWarnings("rawtypes")
+   
     @PostMapping("/criar")
     List<Jogador> create(@RequestBody Jogador jogador){
 
         return jogadorService.create(jogador);
-
     }
 
-    @SuppressWarnings("rawtypes")
+    
     @GetMapping("/list")
     List<Jogador> list(){
 
@@ -39,7 +38,7 @@ public class JogadorController {
 
     }
 
-    @SuppressWarnings("rawtypes")
+    
     @PutMapping("/update/{id}")
     List<Jogador> update(@RequestBody Jogador jogador, @PathVariable Long id){
 
@@ -47,7 +46,7 @@ public class JogadorController {
 
     }
 
-    @SuppressWarnings("rawtypes")
+    
     @DeleteMapping("/delete/{id}")
     public List<Jogador> delete (@PathVariable Long id){
 
@@ -55,11 +54,11 @@ public class JogadorController {
 
     }
 
-    @SuppressWarnings("rawtypes")
+    
     @GetMapping("/findById/{id}")
-    public Jogador findById (@RequestBody Jogador jogador, @PathVariable Long id){
+    public Jogador findById ( @PathVariable Long id){
 
-        return jogadorService.findById(jogador, id);
+        return jogadorService.findById(id);
 
     }
 

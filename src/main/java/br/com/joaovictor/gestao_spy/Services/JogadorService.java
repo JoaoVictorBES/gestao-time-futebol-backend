@@ -2,6 +2,7 @@ package br.com.joaovictor.gestao_spy.Services;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,7 @@ public class JogadorService {
     @Autowired
     public JogadorRepository jogadorRepository;
     
-
-    @SuppressWarnings("rawtypes")
+    
     public List<Jogador> create(Jogador jogador){
         
         jogadorRepository.save(jogador);
@@ -23,22 +23,33 @@ public class JogadorService {
 
     }
 
-    @SuppressWarnings("rawtypes")
+
     public List<Jogador> update(Jogador jogador, Long id){
 
-        jogadorRepository.save(jogador);
+
+        jogador = jogadorRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Jogador não encontrado com o ID: " + id));
+        
+        Jogador jogador1 = new Jogador();
+
+        jogador1.setNome(jogador.getNome());
+        jogador1.setPosicao(jogador.getPosicao());
+        jogador1.setIdade(jogador.getIdade());
+
+        jogadorRepository.save(jogador1);
+        
         return list();
 
     }
 
-    @SuppressWarnings("rawtypes")
+   
     public List<Jogador> list() {
 
-        jogadorRepository.findAll();
-        return list();
+        return jogadorRepository.findAll();
+        
     }
 
-    @SuppressWarnings("rawtypes")
+    
     public List<Jogador> delete (Long id) {
        
         jogadorRepository.deleteById(id);
@@ -47,11 +58,12 @@ public class JogadorService {
 
     }
 
-    @SuppressWarnings("rawtypes")
-    public Jogador <Jogador> findById (Jogador jogador, Long id){
+    
+    public Jogador  findById (Long id){
 
-        jogadorRepository.findById(id);
-        return findById(jogador, id);
+        Jogador jogador2 = jogadorRepository.findById(id).get();
+        return jogador2;
+
 
     }
 

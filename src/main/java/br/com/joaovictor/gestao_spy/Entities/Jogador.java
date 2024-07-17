@@ -1,6 +1,5 @@
 package br.com.joaovictor.gestao_spy.Entities;
 
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,20 +9,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "jogadores")
-public class Jogador<T> {
-    
+public class Jogador {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String posicao;
-    private Date aniversario;
+    private Long idade;
     
-    public Jogador(Long id, String nome, String posicao, Date aniversario) {
+    public Jogador(){
+
+    }
+
+    public Jogador(Long id, String nome, String posicao, Long idade) {
         this.id = id;
         this.nome = nome;
         this.posicao = posicao;
-        this.aniversario = aniversario;
+        this.idade = idade;
     }
 
     public Long getId() {
@@ -50,16 +53,11 @@ public class Jogador<T> {
         this.posicao = posicao;
     }
 
-    public Date getAniversario() {
-        return aniversario;
+    public Long getIdade() {
+        return idade;
     }
-
-    public void setAniversario(Date aniversario) {
-        this.aniversario = aniversario;
+    public void setIdade(Long idade) {
+        this.idade = idade;
     }
-
-    
-
-    
 
 }
