@@ -27,16 +27,15 @@ public class JogadorService {
     public List<Jogador> update(Jogador jogador, Long id){
 
 
-        jogador = jogadorRepository.findById(id)
+        Jogador jogadorExistente = jogadorRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Jogador não encontrado com o ID: " + id));
         
-        Jogador jogador1 = new Jogador();
 
-        jogador1.setNome(jogador.getNome());
-        jogador1.setPosicao(jogador.getPosicao());
-        jogador1.setIdade(jogador.getIdade());
+        jogadorExistente.setNome(jogador.getNome());
+        jogadorExistente.setPosicao(jogador.getPosicao());
+        jogadorExistente.setIdade(jogador.getIdade());
 
-        jogadorRepository.save(jogador1);
+        jogadorRepository.save(jogadorExistente);
         
         return list();
 

@@ -3,6 +3,11 @@ package br.com.joaovictor.gestao_spy.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,19 +21,24 @@ public class JogosController {
     @Autowired
     private JogosService jogosService;
 
-    public List<Jogo> create(Jogo jogo){
+    @PostMapping("/create")
+    public List<Jogo> create(@RequestBody Jogo jogo){
 
-        return jogosService.create (jogo);
+        jogosService.create (jogo);
+        return list();
+        
 
     }
 
+    @GetMapping ("/list")
     public List<Jogo> list (){
 
         return jogosService.list();
 
     }
 
-    public List<Jogo> update(Jogo jogo, Long id){
+     @PutMapping("/update/{id}")
+    public List<Jogo> update(@RequestBody Jogo jogo, @PathVariable Long id){
 
         return jogosService.update(jogo, id);
 

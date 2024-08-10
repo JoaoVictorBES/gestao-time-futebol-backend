@@ -16,21 +16,30 @@ public class TimeService {
 
     public List<Time> create(Time time){
 
-        timeRepository.save(time);
-        return list();
+        try {
+            timeRepository.save(time);
+            return list(); 
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao criar o time: " + e.getMessage(), e);
+        }
 
     }
 
     public List<Time> list(){
 
-        timeRepository.findAll();
-        return list();
+        return timeRepository.findAll();
+        
 
     }
 
     public List<Time> delete(Long id){
 
-        timeRepository.deleteById(id);
+        if (timeRepository.existsById(id)) {
+            timeRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Time não encontrado com o ID: " + id);
+        }
+
         return list();
 
     }
