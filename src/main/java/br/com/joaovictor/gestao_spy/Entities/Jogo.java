@@ -1,6 +1,8 @@
 package br.com.joaovictor.gestao_spy.Entities;
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,15 +16,15 @@ public class Jogo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String data;
+    private LocalDate data;
     private String local;
     private String time;
 
     public Jogo(){
-        
+
     }
 
-    public Jogo(Long id, String data, String local, String time) {
+    public Jogo(Long id, LocalDate data, String local, String time) {
         this.id = id;
         this.data = data;
         this.local = local;
@@ -37,11 +39,11 @@ public class Jogo {
         this.id = id;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

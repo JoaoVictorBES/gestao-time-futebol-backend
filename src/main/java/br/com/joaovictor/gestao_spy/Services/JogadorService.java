@@ -34,6 +34,7 @@ public class JogadorService {
         jogadorExistente.setNome(jogador.getNome());
         jogadorExistente.setPosicao(jogador.getPosicao());
         jogadorExistente.setIdade(jogador.getIdade());
+        jogadorExistente.setMensalidade(jogador.getMensalidade());
 
         jogadorRepository.save(jogadorExistente);
         
