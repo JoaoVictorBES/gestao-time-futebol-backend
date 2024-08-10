@@ -18,6 +18,10 @@ public class Jogo {
     private String local;
     private String time;
 
+    public Jogo(){
+        
+    }
+
     public Jogo(Long id, String data, String local, String time) {
         this.id = id;
         this.data = data;

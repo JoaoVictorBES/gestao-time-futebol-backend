@@ -22,22 +22,36 @@ public class JogosService {
 
     public List<Jogo> list (){
 
-        jogoRepository.findAll();
-        return list();
+        return jogoRepository.findAll();
+        
 
     }
 
     public List<Jogo> update(Jogo jogo, Long id){
 
-        jogoRepository.save(jogo);
-        return list();
+        Jogo jogoExistente = jogoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Jogo não encontrado com o ID: " + id));
+
+        
+        jogoExistente.setTime(jogo.getTime());
+        jogoExistente.setData(jogo.getData());
+        jogoExistente.setLocal(jogo.getLocal());
+        
+
+        jogoRepository.save(jogoExistente);
+        return list(); 
 
     }
 
     public List<Jogo> delete (Long id) {
 
-        jogoRepository.deleteById(id);
-        return list();
-
+        if (jogoRepository.existsById(id)) {
+            jogoRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Jogo não encontrado com o ID: " + id);
+        }
+        return list(); 
     }
+
 }
+

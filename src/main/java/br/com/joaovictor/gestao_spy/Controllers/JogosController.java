@@ -3,6 +3,9 @@ package br.com.joaovictor.gestao_spy.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,26 +24,36 @@ public class JogosController {
     @Autowired
     private JogosService jogosService;
 
-    @PostMapping("/create")
-    public List<Jogo> create(@RequestBody Jogo jogo){
+    @PostMapping("/criar")
+    public ResponseEntity<List<Jogo>> create(@RequestBody Jogo jogo){
 
-        jogosService.create (jogo);
-        return list();
+        List <Jogo> jogos =jogosService.create (jogo);
+        return new ResponseEntity<>(jogos, HttpStatus.CREATED);
         
 
     }
 
     @GetMapping ("/list")
-    public List<Jogo> list (){
+    public ResponseEntity<List<Jogo>> list() {
 
-        return jogosService.list();
+        List<Jogo> jogos = jogosService.list();
+        return new ResponseEntity<>(jogos, HttpStatus.OK);
 
     }
 
      @PutMapping("/update/{id}")
-    public List<Jogo> update(@RequestBody Jogo jogo, @PathVariable Long id){
+     public ResponseEntity<List<Jogo>> update(@RequestBody Jogo jogo, @PathVariable Long id) {
+       
+        List<Jogo> jogos = jogosService.update(jogo, id);
+        return new ResponseEntity<>(jogos, HttpStatus.OK);
 
-        return jogosService.update(jogo, id);
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<List<Jogo>> delete(@PathVariable Long id) {
+
+        List<Jogo> jogos = jogosService.delete(id);
+        return new ResponseEntity<>(jogos, HttpStatus.OK);
+        
     }
 }
