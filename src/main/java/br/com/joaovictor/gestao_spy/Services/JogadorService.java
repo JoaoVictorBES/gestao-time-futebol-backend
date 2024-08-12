@@ -30,7 +30,6 @@ public class JogadorService {
         Jogador jogadorExistente = jogadorRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Jogador não encontrado com o ID: " + id));
         
-
         jogadorExistente.setNome(jogador.getNome());
         jogadorExistente.setPosicao(jogador.getPosicao());
         jogadorExistente.setIdade(jogador.getIdade());
