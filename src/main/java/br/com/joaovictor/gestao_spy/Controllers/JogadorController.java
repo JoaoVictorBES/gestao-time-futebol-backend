@@ -3,6 +3,9 @@ package br.com.joaovictor.gestao_spy.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,18 +19,18 @@ import br.com.joaovictor.gestao_spy.Entities.Jogador;
 import br.com.joaovictor.gestao_spy.Services.JogadorService;
 
 @RestController
-@RequestMapping("/jogadores")
+@RequestMapping("api/jogadores")
+@CrossOrigin(origins = "*")
 public class JogadorController {
     
     @Autowired
     private JogadorService jogadorService;
 
-
-   
-    @PostMapping("/criar")
+    @PostMapping("/create")
     List<Jogador> create(@RequestBody Jogador jogador){
 
         return jogadorService.create(jogador);
+        
     }
 
     
@@ -60,6 +63,18 @@ public class JogadorController {
 
         return jogadorService.findById(id);
 
+    }
+    
+    @PutMapping("/{id}/gols")
+    public ResponseEntity<Jogador> adicionarGol(@PathVariable Long id) {
+        Jogador jogador = jogadorService.adicionarGol(id);
+        return new ResponseEntity<>(jogador, HttpStatus.OK);
+    }
+    
+    @PutMapping("/{id}/assistencias")
+    public ResponseEntity<Jogador> adicionarAssistencia(@PathVariable Long id) {
+        Jogador jogador = jogadorService.adicionarAssistencia(id);
+        return new ResponseEntity<>(jogador, HttpStatus.OK);
     }
 
 

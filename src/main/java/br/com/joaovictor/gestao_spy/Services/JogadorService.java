@@ -33,7 +33,7 @@ public class JogadorService {
         jogadorExistente.setNome(jogador.getNome());
         jogadorExistente.setPosicao(jogador.getPosicao());
         jogadorExistente.setIdade(jogador.getIdade());
-        jogadorExistente.setMensalidade(jogador.getMensalidade());
+        /*jogadorExistente.setMensalidade(jogador.getMensalidade());*/
 
         jogadorRepository.save(jogadorExistente);
         
@@ -65,6 +65,19 @@ public class JogadorService {
 
 
     }
+    
+    
+    public Jogador adicionarGol(Long id) {
+        Jogador jogador = jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+        jogador.setGol(jogador.getGol() + 1);
+        return jogadorRepository.save(jogador);
+    }
 
-
+    
+    public Jogador adicionarAssistencia(Long id) {
+        Jogador jogador = jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+        jogador.setAssistencia(jogador.getAssistencia() + 1);
+        return jogadorRepository.save(jogador);
+    }
+    
 }

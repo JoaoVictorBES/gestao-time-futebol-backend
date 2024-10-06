@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.joaovictor.gestao_spy.Entities.Jogador;
 import br.com.joaovictor.gestao_spy.Entities.Jogo;
 import br.com.joaovictor.gestao_spy.Repositories.JogoRepository;
 
@@ -51,6 +52,14 @@ public class JogosService {
             throw new RuntimeException("Jogo não encontrado com o ID: " + id);
         }
         return list(); 
+    }
+    
+    public Jogo  findById (Long id){
+
+    	return jogoRepository.findById(id)
+    	        .orElseThrow(() -> new RuntimeException("Jogo não encontrado com o ID: " + id));
+
+
     }
 
 }

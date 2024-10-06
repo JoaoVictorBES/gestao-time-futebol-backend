@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,14 @@ import br.com.joaovictor.gestao_spy.Entities.Jogo;
 import br.com.joaovictor.gestao_spy.Services.JogosService;
 
 @RestController
-@RequestMapping("/jogos")
+@RequestMapping("api/jogos")
+@CrossOrigin(origins = "*")
 public class JogosController {
     
     @Autowired
     private JogosService jogosService;
 
-    @PostMapping("/criar")
+    @PostMapping("/create")
     public ResponseEntity<List<Jogo>> create(@RequestBody Jogo jogo){
 
         List <Jogo> jogos =jogosService.create (jogo);
@@ -55,5 +57,11 @@ public class JogosController {
         List<Jogo> jogos = jogosService.delete(id);
         return new ResponseEntity<>(jogos, HttpStatus.OK);
         
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Jogo> findById(@PathVariable Long id) {
+        Jogo jogo = jogosService.findById(id);
+        return new ResponseEntity<>(jogo, HttpStatus.OK);
     }
 }

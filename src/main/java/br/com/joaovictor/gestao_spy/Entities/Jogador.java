@@ -1,10 +1,7 @@
 package br.com.joaovictor.gestao_spy.Entities;
 
 
-import br.com.joaovictor.gestao_spy.Entities.Enums.Mensalidade;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,21 +16,23 @@ public class Jogador {
     private Long id;
     private String nome;
     private String posicao;
-    private Long idade;
-
-    @Enumerated(EnumType.STRING)
-    private Mensalidade mensalidade;
+    private int idade;
+    private int gol;
+    private int assistencia;
+   
     
     public Jogador(){
 
     }
 
-    public Jogador(Long id, String nome, String posicao, Long idade, Mensalidade mensalidade) {
+    public Jogador(Long id, String nome, String posicao, int idade, int gol, int assistencia ) {
         this.id = id;
         this.nome = nome;
         this.posicao = posicao;
         this.idade = idade;
-        this.mensalidade = mensalidade;
+        this.gol = gol;
+        this.assistencia = assistencia;
+
     }
 
     public Long getId() {
@@ -60,19 +59,35 @@ public class Jogador {
         this.posicao = posicao;
     }
 
-    public Long getIdade() {
+    public int getIdade() {
         return idade;
     }
-    public void setIdade(Long idade) {
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
-    public Mensalidade getMensalidade() {
+	public int getAssistencia() {
+		return assistencia;
+	}
+
+	public void setAssistencia(int assistencia) {
+		this.assistencia = assistencia;
+	}
+
+	public int getGol() {
+		return gol;
+	}
+
+	public void setGol(int gol) {
+		this.gol = gol;
+	}
+
+   /*public Mensalidade getMensalidade() {
         return mensalidade;
     }
 
     public void setMensalidade(Mensalidade mensalidade) {
         this.mensalidade = mensalidade;
-    }
+    } */ 
 
 }
