@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.joaovictor.gestao_spy.Entities.Evento;
 import br.com.joaovictor.gestao_spy.Entities.Jogo;
 import br.com.joaovictor.gestao_spy.Services.JogosService;
 
@@ -63,5 +64,11 @@ public class JogosController {
     public ResponseEntity<Jogo> findById(@PathVariable Long id) {
         Jogo jogo = jogosService.findById(id);
         return new ResponseEntity<>(jogo, HttpStatus.OK);
+    }
+    
+    @PostMapping("/{id}/adicionar-evento")
+    public ResponseEntity<Jogo> adicionarEvento(@PathVariable Long id, @RequestBody Evento evento) {
+        Jogo jogoAtualizado = jogosService.adicionarEvento(id, evento);
+        return new ResponseEntity<>(jogoAtualizado, HttpStatus.OK);
     }
 }

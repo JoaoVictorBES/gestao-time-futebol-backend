@@ -43,7 +43,7 @@ public class JogadorController {
 
     
     @PutMapping("/update/{id}")
-    List<Jogador> update(@RequestBody Jogador jogador, @PathVariable Long id){
+    public List<Jogador> update(@RequestBody Jogador jogador, @PathVariable Long id){
 
         return jogadorService.update(jogador, id);
 
@@ -52,29 +52,34 @@ public class JogadorController {
     
     @DeleteMapping("/delete/{id}")
     public List<Jogador> delete (@PathVariable Long id){
-
+    	
         return jogadorService.delete(id);
 
     }
 
     
     @GetMapping("/findById/{id}")
-    public Jogador findById ( @PathVariable Long id){
+    public ResponseEntity<Jogador> findById ( @PathVariable Long id){
 
-        return jogadorService.findById(id);
+    	Jogador jogador = jogadorService.findById(id);
+        return new ResponseEntity<>(jogador, HttpStatus.OK);
 
     }
     
     @PutMapping("/{id}/gols")
     public ResponseEntity<Jogador> adicionarGol(@PathVariable Long id) {
+    	
         Jogador jogador = jogadorService.adicionarGol(id);
         return new ResponseEntity<>(jogador, HttpStatus.OK);
+        
     }
     
     @PutMapping("/{id}/assistencias")
     public ResponseEntity<Jogador> adicionarAssistencia(@PathVariable Long id) {
+    	
         Jogador jogador = jogadorService.adicionarAssistencia(id);
         return new ResponseEntity<>(jogador, HttpStatus.OK);
+        
     }
 
 

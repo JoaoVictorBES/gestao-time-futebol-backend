@@ -19,19 +19,22 @@ public class Jogador {
     private int idade;
     private int gol;
     private int assistencia;
+    private String imagemUrl;
    
     
     public Jogador(){
 
     }
 
-    public Jogador(Long id, String nome, String posicao, int idade, int gol, int assistencia ) {
+    public Jogador(Long id, String nome, String posicao, int idade, int gol, int assistencia, String imagemUrl) {
+    	
         this.id = id;
         this.nome = nome;
         this.posicao = posicao;
         this.idade = idade;
         this.gol = gol;
         this.assistencia = assistencia;
+        this.imagemUrl = imagemUrl;
 
     }
 
@@ -82,12 +85,17 @@ public class Jogador {
 		this.gol = gol;
 	}
 
-   /*public Mensalidade getMensalidade() {
-        return mensalidade;
-    }
+	public String getImagemUrl() {
+		return imagemUrl;
+	}
 
-    public void setMensalidade(Mensalidade mensalidade) {
-        this.mensalidade = mensalidade;
-    } */ 
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
+	}
+
+	public void incrementarGols() {
+	    this.gol++; 
+	}
+
 
 }
