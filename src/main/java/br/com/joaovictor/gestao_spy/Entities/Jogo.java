@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "jogos")
+@Table(name = "jogo")
 public class Jogo {
     
     @Id
@@ -24,6 +24,8 @@ public class Jogo {
     private String time;
     private String hora;
     private String resultado;
+    private int assistencias = 0;
+    private int gols = 0;
     
     @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evento> eventos = new ArrayList<>();
@@ -32,13 +34,15 @@ public class Jogo {
 
     }
 
-    public Jogo(Long id, String data, String local, String time, String hora, String resultado) {
-        this.id = id;
+    public Jogo(String data, String local, String time, String hora, String resultado, int assistencias, int gols) {
+        
         this.data = data;
         this.local = local;
         this.time = time;
         this.hora = hora;
         this.resultado = resultado;
+        this.assistencias = assistencias;
+        this.gols = gols;
     }
 
     public Long getId() {
@@ -100,5 +104,21 @@ public class Jogo {
         this.eventos.remove(evento);
         evento.setJogo(null);
     }
+
+	public int getAssistencia() {
+		return assistencias;
+	}
+
+	public void setAssistencia(int assistencia) {
+		this.assistencias = assistencia;
+	}
+
+	public int getGols() {
+		return gols;
+	}
+
+	public void setGols(int gols) {
+		this.gols = gols;
+	}
     
 }

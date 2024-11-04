@@ -9,6 +9,7 @@ import br.com.joaovictor.gestao_spy.Entities.Evento;
 import br.com.joaovictor.gestao_spy.Entities.Jogador;
 import br.com.joaovictor.gestao_spy.Entities.Jogo;
 import br.com.joaovictor.gestao_spy.Repositories.EventoRepository;
+import br.com.joaovictor.gestao_spy.Repositories.JogadorRepository;
 import br.com.joaovictor.gestao_spy.Repositories.JogoRepository;
 
 @Service
@@ -19,6 +20,9 @@ public class JogosService {
     
     @Autowired
     private EventoRepository eventoRepository;
+    
+    @Autowired
+    private JogadorRepository jogadorRepository;
 
     public List<Jogo> create(Jogo jogo){
 
@@ -58,7 +62,9 @@ public class JogosService {
         } else {
             throw new RuntimeException("Jogo não encontrado com o ID: " + id);
         }
+        
         return list(); 
+        
     }
     
     public Jogo  findById (Long id){
@@ -70,6 +76,7 @@ public class JogosService {
 
     
     public Jogo adicionarEvento(Long jogoId, Evento evento) {
+    	
         Jogo jogo = jogoRepository.findById(jogoId)
             .orElseThrow(() -> new RuntimeException("Jogo não encontrado com o ID: " + jogoId));
         
@@ -77,10 +84,10 @@ public class JogosService {
         jogo.addEvento(evento);
 
         if (evento.getTipoEvento().equalsIgnoreCase("gol")) {
-        	Jogador jogador = evento.getJogador(); // Obter o jogador do evento
-            jogador.incrementarGols(); // Incrementar a quantidade de gols
+        	Jogador jogador = evento.getJogador(); 
+            jogador.incrementarGols(); 
             jogadorRepository.save(jogador);
-        } else if (evento.getTipoEvento().equalsIgnoreCase("assistencia")) {}
+        }
 
         eventoRepository.save(evento);
         return jogoRepository.save(jogo);

@@ -18,7 +18,7 @@ public class Jogador {
     private String posicao;
     private int idade;
     private int gol;
-    private int assistencia;
+    private int assistencia = 0;
     private String imagemUrl;
    
     

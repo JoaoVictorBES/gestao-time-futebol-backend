@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class JogadorController {
     @Autowired
     private JogadorService jogadorService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     List<Jogador> create(@RequestBody Jogador jogador){
 
@@ -41,7 +43,7 @@ public class JogadorController {
 
     }
 
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public List<Jogador> update(@RequestBody Jogador jogador, @PathVariable Long id){
 
@@ -49,7 +51,7 @@ public class JogadorController {
 
     }
 
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public List<Jogador> delete (@PathVariable Long id){
     	
@@ -57,7 +59,7 @@ public class JogadorController {
 
     }
 
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/findById/{id}")
     public ResponseEntity<Jogador> findById ( @PathVariable Long id){
 
@@ -66,6 +68,7 @@ public class JogadorController {
 
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/gols")
     public ResponseEntity<Jogador> adicionarGol(@PathVariable Long id) {
     	
@@ -74,6 +77,7 @@ public class JogadorController {
         
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/assistencias")
     public ResponseEntity<Jogador> adicionarAssistencia(@PathVariable Long id) {
     	
