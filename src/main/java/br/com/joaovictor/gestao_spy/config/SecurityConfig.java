@@ -8,11 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -36,7 +40,7 @@ public class SecurityConfig  {
 		.csrf(AbstractHttpConfigurer::disable)
 		.cors(AbstractHttpConfigurer::disable)
 		.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/api/login").permitAll()
+				.requestMatchers("/api/login", "/api/user/cadastro").permitAll()
 				.anyRequest().authenticated())
 		.authenticationProvider(authenticationProvider)
 		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -60,6 +64,24 @@ public class SecurityConfig  {
 		bean.setOrder(-102);
 		return bean;
 	}
-	
+
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+	@SuppressWarnings("removal")
+	@Bean
+public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    return http.getSharedObject(AuthenticationManagerBuilder.class)
+            .inMemoryAuthentication()
+            .withUser("user")
+            .password(passwordEncoder().encode("password"))
+            .roles("USER")
+            .and()
+            .and()
+            .build();
+}
+
 
 }

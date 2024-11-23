@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.joaovictor.gestao_spy.Entities.Evento;
 import br.com.joaovictor.gestao_spy.Entities.Jogo;
+import br.com.joaovictor.gestao_spy.Services.EventoService;
 import br.com.joaovictor.gestao_spy.Services.JogosService;
 
 @RestController
@@ -27,6 +28,9 @@ public class JogosController {
     
     @Autowired
     private JogosService jogosService;
+
+	@Autowired
+	private EventoService eventoService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
@@ -99,15 +103,10 @@ public class JogosController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/eventos/{id}")
-    public ResponseEntity<?> adicionarEvento(@PathVariable Long id, @RequestBody Evento evento) {
+    public ResponseEntity<Jogo> adicionarEvento(@PathVariable Long id, @RequestBody Evento evento) {
        
-    	try {
-    		Jogo jogoAtualizado = jogosService.adicionarEvento(id, evento);
-    		return new ResponseEntity<>(jogoAtualizado, HttpStatus.OK);
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    		return new ResponseEntity<>("Erro ao adicionar evento: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    	}
+    	Jogo novoEvento = eventoService.adicionarEvento(id, evento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoEvento);
     	
     }
 }

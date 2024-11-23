@@ -23,7 +23,7 @@ public class JwtServiceGenerator {
   public String generateToken(Usuario userDetails) {
 	
 	  
-	  //AQUI COLOCA O QUE MAIS VAI COMPOR O PAYLOAD DO TOKEN
+	  
       Map<String, Object> extraClaims = new HashMap<>();
       extraClaims.put("username", userDetails.getUsername());
       extraClaims.put("id", userDetails.getId().toString());
