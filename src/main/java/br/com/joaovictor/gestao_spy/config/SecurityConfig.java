@@ -72,8 +72,8 @@ public class SecurityConfig  {
 
 	@SuppressWarnings("removal")
 	@Bean
-public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-    return http.getSharedObject(AuthenticationManagerBuilder.class)
+	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    	return http.getSharedObject(AuthenticationManagerBuilder.class)
             .inMemoryAuthentication()
             .withUser("user")
             .password(passwordEncoder().encode("password"))
@@ -81,7 +81,7 @@ public AuthenticationManager authenticationManager(HttpSecurity http) throws Exc
             .and()
             .and()
             .build();
-}
+	}
 
 
 }
