@@ -1,6 +1,7 @@
 package br.com.joaovictor.gestao_spy.auth;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +28,8 @@ public class Usuario implements UserDetails{
 	private String email;
 	private String password;
 	private String role;
+	private String recoveryToken; 
+    private LocalDateTime tokenExpiration;
 
 
 	public Usuario () {}
@@ -114,6 +117,24 @@ public class Usuario implements UserDetails{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getRecoveryToken() {
+		return recoveryToken;
+	}
+
+	public void setRecoveryToken(String recoveryToken) {
+		this.recoveryToken = recoveryToken;
+	}
+
+	public LocalDateTime getTokenExpiration() {
+		return tokenExpiration;
+	}
+
+	public void setTokenExpiration(LocalDateTime tokenExpiration) {
+		this.tokenExpiration = tokenExpiration;
+	}
+
+    
 
 
 	

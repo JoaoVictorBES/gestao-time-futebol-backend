@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.joaovictor</groupId>
@@ -71,22 +71,19 @@
 
 		<dependency>
         <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.10.0</version><!--$NO-MVN-MAN-VER$-->
+        <artifactId>junit-jupiter-engine</artifactId><!--$NO-MVN-MAN-VER$-->
         <scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>5.5.0</version><!--$NO-MVN-MAN-VER$-->
+			<artifactId>mockito-core</artifactId><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>5.5.0</version><!--$NO-MVN-MAN-VER$-->
+			<artifactId>mockito-junit-jupiter</artifactId><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
 		</dependency>
 
@@ -106,6 +103,11 @@
     		<groupId>io.jsonwebtoken</groupId>
     		<artifactId>jjwt-jackson</artifactId>
     		<version>0.11.5</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
 	</dependencies>

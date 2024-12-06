@@ -40,8 +40,8 @@ public class SecurityConfig  {
 		.csrf(AbstractHttpConfigurer::disable)
 		.cors(AbstractHttpConfigurer::disable)
 		.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/api/login", "/api/user/cadastro").permitAll()
-				.anyRequest().authenticated())
+				.anyRequest().permitAll()
+		)
 		.authenticationProvider(authenticationProvider)
 		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 		.sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
